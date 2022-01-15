@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+
+ <title>Teoria Números</title>
+ 
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+</head>
+<style>
+</style>
+
+
+<body>
+
+      <h1><a href="https://ideiasesquecidas.com"> <img src=	"https://ideiasesquecidas.files.wordpress.com/2020/03/forgottenlogo.png" width="90" height = "50"></a>Teoria Números</h1>
+
+<h1>Divisão entre dois números.</h1>
+<form  > 
+Numerador:  
+<input type="text" id="Numerador" size="10" value="12">  
+<br> <br>  
+Denominador  
+<input type="text" id="Denominador" size="10"  value="4">  
+</form>  
+<p>
+<button onclick="Desenhar()">Rodar</button>
+</p>
+
+
+</Body>   
+</Html>  
+
+<script type = "text/javascript">
+    var svg = d3.select("body")
+        .append("svg")
+        .attr("width", 1520)
+        .attr("height", 800);
+   
+	Desenhar();
+
+	function Desenhar()
+	{
+	svg.selectAll("*").remove();
+
+	//---------------------------------------------------------------
+	var i;
+	var j;
+	var cx =[];
+	var cy=[];
+	var r0 =[];
+	
+	var num =parseInt(d3.select("#Numerador").property("value"));
+	var denum = parseInt(d3.select("#Denominador").property("value"));
+	var quociente;
+	var resto;
+	
+	quociente = Math.floor(num/denum);
+	resto = num % denum;
+	
+	//Plota o quociente
+	for (i=0; i<quociente;i++)
+		{
+		for (j=0; j<denum; j++)
+			{
+				cx.push(50 +j*50);
+				cy.push(50 +i*50);		
+				r0.push(20);
+			}
+		}
+		
+	//Plota o resto		
+		i = quociente;
+		for (j=0; j<resto; j++)
+			{
+				cx.push(50 +j*50);
+				cy.push(50 +i*50);		
+				r0.push(20);
+			}	
+	svg.selectAll("circle")
+			.data(cx)
+			.enter()
+			.append("circle")
+		  .attr("cx", function(d,i){return cx[i]})
+		  .attr("cy", function(d,i){return cy[i]})
+		  .attr("r", 20)
+		  .attr("stroke", "black")
+		  .attr("stroke-width", 1.5)
+		  .attr("fill", "goldenrod")
+	}
+
+
+	
+  </script>
+</body>
+</html>
